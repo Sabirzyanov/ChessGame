@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Chess.Core
 {
@@ -18,7 +14,7 @@ namespace Chess.Core
                 "Knight" => new Knight(x, y),
                 "Queen" => new Queen(x, y),
                 "Rook" => new Rook(x, y),
-                _ => new Pawn(x, y),
+                _ => new Pawn(x, y)
             };
         }
 
