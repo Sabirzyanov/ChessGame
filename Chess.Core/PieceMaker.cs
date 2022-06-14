@@ -2,7 +2,7 @@
 
 namespace Chess.Core
 {
-    class PieceMaker
+    public class PieceMaker
     {
         static public Piece Make(string pieceCode, int x, int y)
         {
@@ -20,8 +20,8 @@ namespace Chess.Core
 
         static public Piece Make(string pieceCode, string coords)
         {
-            int x = Convert.ToInt32(coords[0]);
-            int y = Convert.ToInt32(coords[1]);
+            int x = coords[0] - 64;
+            int y = (int) char.GetNumericValue(coords[1]);
             return Make(pieceCode, x, y);
         }
     }

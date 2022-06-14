@@ -15,9 +15,8 @@ namespace Chess.Core
 
         public Piece(string coord)
         {
-            x = ConvertCharToInt(coord[0]);
-            y = ConvertCharToInt(coord[1]);
-
+            int x2 = coord[0] - 64;
+            int y2 = (int)char.GetNumericValue(coord[1]);
         }
 
         public Piece(int x, int y)
@@ -26,45 +25,34 @@ namespace Chess.Core
             this.y = y;
         }
 
-        public void Move(int x2, int y2)
+        public void Move(MoveController moveController, int x2, int y2)
         {
             if (IsRightMove(x2, y2))
             {
-                x = x2;
-                y = y2;
+                moveController.Move(this, ToString());
             }
         }
         
 
-        public void Move(string coord)
+        public void Move(MoveController moveController, string coord)
         {
-            int x2 = ConvertCharToInt(coord[0]);
-            int y2 = ConvertCharToInt(coord[1]);
-            Move(x2, y2);
+            int x2 = coord[0] - 64;
+            int y2 = (int)char.GetNumericValue(coord[1]);
+            Move(moveController, x2, y2);
         }
 
         public abstract bool IsRightMove(int x2, int y2);
 
-        public bool IsRightMove(string coords)
+        public bool IsRightMove(string coord)
         {
-            int x2 = ConvertCharToInt(coords[0]);
-            int y2 = ConvertCharToInt(coords[1]);
+            int x2 = coord[0] - 64;
+            int y2 = (int)char.GetNumericValue(coord[1]);
             return IsRightMove(x2, y2);
         }
 
         public override string ToString()
         {
-            return $"{ConvertIntToChar(x)}{ConvertIntToChar(y)}";
-        }
-
-        public int ConvertCharToInt(char c)
-        {
-            return Convert.ToInt32(c);
-        }
-
-        public char ConvertIntToChar(int i)
-        {
-            return (char)(i + 64);
+            return $"{((char)(x + 64))}{y}";
         }
     }
 }
