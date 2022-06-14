@@ -10,8 +10,8 @@ namespace Chess.Core
 {
     public abstract class Piece
     {
-        protected int x;
-        protected int y;
+        public int x;
+        public int y;
 
         public Piece(string coord)
         {
@@ -29,7 +29,7 @@ namespace Chess.Core
         {
             if (IsRightMove(x2, y2))
             {
-                moveController.Move(this, ToString());
+                moveController.Move(this, GetCoords(x2, y2));
             }
         }
         
@@ -50,9 +50,14 @@ namespace Chess.Core
             return IsRightMove(x2, y2);
         }
 
+        public string GetCoords(int x2, int y2)
+        {
+            return $"{((char)(x2 + 64))}{y2}";
+        }
+
         public override string ToString()
         {
-            return $"{((char)(x + 64))}{y}";
+            return $"Type: {GetType().Name}\nCoords: {((char)(x + 64))}{y}";
         }
     }
 }

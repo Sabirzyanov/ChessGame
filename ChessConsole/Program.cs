@@ -6,62 +6,42 @@ namespace ChessConsole
 {
     internal class Program
     {
-        static List<Piece> pieces = new List<Piece>();
-        static string _selectedFigureType = "";
         static void Main(string[] args)
         {
-            
-            StartMenu();
-        }
-
-        public static void StartMenu()
-        {
-            string[] options =
+            Piece piece;
+            ConsoleMoveController moveController = new ConsoleMoveController();
+            while (true)
             {
-                "Add figure", "Exit"
-            };
-            Menu menu = new Menu(options);
-            int selectedOption = menu.Run();
+                Console.WriteLine("--- Menu ---");
+                Console.WriteLine("1. Create Pawn - Pawn");
+                Console.WriteLine("2. Create Bishop - Bishop");
+                Console.WriteLine("3. Create King - King");
+                Console.WriteLine("4. Create Knight - Knight");
+                Console.WriteLine("5. Create Queen - Queen");
+                Console.WriteLine("6. Create Rook - Rook");
 
-            switch (selectedOption)
-            {
-                case 0:
-                    SelectFigure();
-                    break;
-                case 1:
-                    Exit();
-                    break;
+                string figureCode = Console.ReadLine();
+                Console.Write("Enter coords as chees - [A-H][1-8]: ");
+                string coords = Console.ReadLine().ToUpper();
+                piece = PieceMaker.Make(figureCode, coords);
+
+                Console.Write("Enter move coordinates - [A-H][1-8]: ");
+                string moveCoords = Console.ReadLine().ToUpper();
+
+                if (piece.IsRightMove(moveCoords))
+                {
+                    Console.WriteLine("Can move");
+                    piece.Move(moveController, moveCoords);
+                    Console.WriteLine(piece);
+                }
+                else 
+                {
+                    Console.WriteLine("Can't move");
+                    Console.WriteLine(piece);
+                }
+                break;
             }
         }
 
-        private static void SelectFigure()
-        {
-            string[] figures =
-            {
-                "Bishop", "King", "Knight", "Pawn", "Queen", "Rook", "Exit"
-            };
-            Menu menu = new Menu(figures);
-            int selectedOption = menu.Run();
-            if (selectedOption == figures.Length - 1)
-            {
-                StartMenu();
-            }
-            _selectedFigureType = figures[selectedOption];
-
-        }
-
-        private void AddFigure()
-        {
-            Console.Write("Enter Coordinates of Piece as Chess - (A-H)(1-8):");
-            string coords = Console.ReadLine();
-
-        }
-
-        private static void Exit()
-        {
-            Console.WriteLine("\nPress any key to exit...");
-            Console.ReadKey(true);
-            Environment.Exit(0);
-        }
     }
 }
