@@ -22,12 +22,22 @@ namespace Chess.WPF
             _moveController = new WPFMoveController(grid);
         }
 
+        private void Cell_MouseRightButtonDown(object sender, RoutedEventArgs e)
+        {
+            Button cell = (Button)sender;
+
+            if (cell.Content is not null)
+            {
+                cell.Content = null;
+            }
+        }
+
         private void Cell_MouseLeftButtonDown(object sender, RoutedEventArgs e)
         {
             Button cell = (Button)sender;
             string position = cell.Name;
 
-            if (_isAdding & cell.Content is null)
+            if (_isAdding)
             {
                 Piece piece = PieceMaker.Make(_selectedFigureCode, position);
                 cell.Content = piece.GetType().Name;
@@ -41,7 +51,7 @@ namespace Chess.WPF
             else 
             {   
                 _selectedPiece = PieceMaker.Make(cell.Content?.ToString(), position);
-                if (cell.Content is not null)
+                if (_selectedPiece != null)
                 {
                     _isMoving = true;
                 }

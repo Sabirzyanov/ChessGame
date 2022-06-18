@@ -14,8 +14,8 @@ namespace Chess.WPF
         public override void Move(Piece piece, string coords)
         {
             Button destinationCell = (Button) grid.FindName(coords);
-            Button originCell = (Button)grid.FindName(piece.ToString());
-            if (piece.IsRightMove(coords) & destinationCell.Content != null)
+            Button originCell = (Button)grid.FindName(piece.GetCoords());
+            if (piece.IsRightMove(coords))
             {
                 originCell.Content = null;
                 destinationCell.Content = piece.GetType().Name;

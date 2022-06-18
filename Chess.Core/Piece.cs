@@ -29,7 +29,7 @@ namespace Chess.Core
         {
             if (IsRightMove(x2, y2))
             {
-                moveController.Move(this, GetCoords(x2, y2));
+                moveController.Move(this, ConvertIntToStringCoords(x2, y2));
             }
         }
         
@@ -50,9 +50,14 @@ namespace Chess.Core
             return IsRightMove(x2, y2);
         }
 
-        public string GetCoords(int x2, int y2)
+        public string ConvertIntToStringCoords(int x2, int y2)
         {
             return $"{((char)(x2 + 64))}{y2}";
+        }
+
+        public string GetCoords()
+        {
+            return $"{((char)(x + 64))}{y}";
         }
 
         public override string ToString()
