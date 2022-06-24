@@ -28,7 +28,7 @@ namespace ChessConsole
                 Console.Write("Enter move coordinates - [A-H][1-8]: ");
                 string moveCoords = Console.ReadLine().ToUpper();
 
-                if (piece.IsRightMove(moveCoords))
+                if (piece.IsRightMove(moveCoords.ToUpper()))
                 {
                     Console.WriteLine("Can move");
                     piece.Move(moveController, moveCoords);

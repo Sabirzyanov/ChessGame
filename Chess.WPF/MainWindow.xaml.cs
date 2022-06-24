@@ -5,7 +5,7 @@ using System.Windows.Controls;
 namespace Chess.WPF
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for ChessGame WPF Application
     /// </summary>
     public partial class MainWindow : Window
     {
@@ -45,13 +45,13 @@ namespace Chess.WPF
             }
             else if (_isMoving)
             {
-                _moveController.Move(_selectedPiece, position);
+                _selectedPiece.Move(_moveController, position);
                 _isMoving = false;
             }
             else 
             {   
                 _selectedPiece = PieceMaker.Make(cell.Content?.ToString(), position);
-                if (_selectedPiece != null)
+                if (_selectedPiece != null && cell.Content != null)
                 {
                     _isMoving = true;
                 }
