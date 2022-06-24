@@ -37,7 +37,7 @@ namespace Chess.WPF
             Button cell = (Button)sender;
             string position = cell.Name;
 
-            if (_isAdding)
+            if (_isAdding && cell.Content == null)
             {
                 Piece piece = PieceMaker.Make(_selectedFigureCode, position);
                 cell.Content = piece.GetType().Name;
